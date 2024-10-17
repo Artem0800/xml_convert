@@ -11,7 +11,7 @@ def show_all_values_in_ws(ws: Worksheet):
         xl.append(row)
 
 gc: Client = gspread.service_account("Confic//service_account.json")
-sh: Spreadsheet = gc.open_by_url(input("Введите ссылку на ваш Google Sheets"))
+sh: Spreadsheet = gc.open_by_url("https://docs.google.com/spreadsheets/d/1hEFsXzTWI9fsX3sFom3lLWTYa65JyusGhmMUtPLwAPY/edit?gid=0#gid=0")
 ws = sh.sheet1
 show_all_values_in_ws(ws)
 
@@ -44,6 +44,13 @@ def collection_data_google_sheets(tree, root):
             elif item_tag == "Title":
                 description_element = ET.SubElement(ad_element, "Title")
                 description_element.text = ET.CDATA(item_info_tag)  # Вставка CDATA секции
+            elif item_tag == "CompatibleCars":
+                ad_element_ = ET.SubElement(ad_element, "CompatibleCars")
+                for img, tag_dop in zip(item_info_tag.split("|"), ["Make", "Model", "Generation", "Modification", "BodyType", "Doors"]):
+                    if img == "":
+                        continue
+                    child = ET.SubElement(ad_element_, tag_dop)
+                    child.text = img.strip()
             else:
                 child = ET.SubElement(ad_element, item_tag)
                 child.text = item_info_tag

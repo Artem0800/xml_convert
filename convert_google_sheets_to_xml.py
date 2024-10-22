@@ -24,13 +24,17 @@ def load_or_create_xml(file):
     tree = ET.ElementTree(root)
     return tree, root
 
+
 def collection_data_google_sheets(tree, root):
     count_result = len(xl)
     for item in range(count_result):
         ad_element = ET.SubElement(root, "Ad")
+
+        # Проверяем, был ли создан тег CompatibleCars
+        compatible_cars_element = None
+
         for item_tag, item_info_tag in zip(tag, xl[item]):
             if item_tag == "Images":
-                # Проверка наличия значения, чтобы <Images> не отображался как текстовый элемент
                 if item_info_tag.strip():
                     ad_element_ = ET.SubElement(ad_element, "Images")
                     for img in item_info_tag.replace("|", " ").split():
@@ -40,14 +44,19 @@ def collection_data_google_sheets(tree, root):
                 continue
             elif item_tag == "Description":
                 description_element = ET.SubElement(ad_element, "Description")
-                description_element.text = ET.CDATA(item_info_tag)  # Вставка CDATA секции
+                description_element.text = ET.CDATA(item_info_tag)
             elif item_tag == "Title":
-                description_element = ET.SubElement(ad_element, "Title")
-                description_element.text = ET.CDATA(item_info_tag)  # Вставка CDATA секции
-            elif item_tag == "CompatibleCars":
-                ad_element_ = ET.SubElement(ad_element, "CompatibleCars")
-                for img, tag_dop in zip(item_info_tag.split("|"), ["Make", "Model", "Generation", "Modification", "BodyType", "Doors"]):
-                    if img == "":
+                title_element = ET.SubElement(ad_element, "Title")
+                title_element.text = ET.CDATA(item_info_tag)
+            elif item_tag == "CompatibleCar":
+                # Создаем тег CompatibleCars только один раз
+                if compatible_cars_element is None:
+                    compatible_cars_element = ET.SubElement(ad_element, "CompatibleCars")
+
+                ad_element_ = ET.SubElement(compatible_cars_element, "CompatibleCar")
+                for img, tag_dop in zip(item_info_tag.split("|"),
+                                        ["Make", "Model", "Generation", "Modification", "BodyType", "Doors"]):
+                    if img == "" or img == " ":
                         continue
                     child = ET.SubElement(ad_element_, tag_dop)
                     child.text = img.strip()
@@ -55,7 +64,6 @@ def collection_data_google_sheets(tree, root):
                 child = ET.SubElement(ad_element, item_tag)
                 child.text = item_info_tag
 
-    # Запись дерева в XML файл один раз после всех изменений с правильной кодировкой
     tree.write("output_google.xml", encoding="UTF-8", xml_declaration=True, pretty_print=True)
 
 def main():

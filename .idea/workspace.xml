@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="493b6f57-777a-4bdb-8b38-2ffab9edf247" name="Changes" comment="13">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/bot.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/convert_google_sheets_to_xml.py" beforeDir="false" afterPath="$PROJECT_DIR$/convert_google_sheets_to_xml.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output_google.xml" beforeDir="false" afterPath="$PROJECT_DIR$/output_google.xml" afterDir="false" />
@@ -40,11 +39,11 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/Artem_39/Documents/GitHub/xml_convert",
+    "last_opened_file_path": "C:/Users/Artem_39/Desktop/tg bot",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.convert_google_sheets_to_xml">
     <configuration name="bot" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="avito-xml-convert" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -110,8 +109,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.convert_google_sheets_to_xml" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.bot" />
       </list>
     </recent_temporary>
